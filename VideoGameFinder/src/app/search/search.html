@@ -1,0 +1,14 @@
+<p>search works!</p>
+
+<form (ngSubmit)="add()">
+            <div class="mb-3">
+                <label form="gameName" class="form-label">Game Name</label>
+                <input type="text" class="form-control" id="gameName" [(ngModel)]="gameName" name="gameName">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        @if (searched && games.games().length === 0) {
+  <div class="alert alert-danger mt-3 text-center">
+    No games found.
+  </div>
+}
