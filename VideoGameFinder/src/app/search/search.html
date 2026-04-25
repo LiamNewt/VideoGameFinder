@@ -1,9 +1,11 @@
-<p>search works!</p>
-
+<div class="container">
+<div class="row justify-content-center">
+    <div class="col-sm-4">
+        <h2 class="d-flex flex-column align-items-center mt-4">Game Search</h2>
 <form (ngSubmit)="add()">
             <div class="mb-3">
                 <label form="gameName" class="form-label">Game Name</label>
-                <input type="text" class="form-control" id="gameName" [(ngModel)]="gameName" name="gameName">
+                <input type="text" class="form-control" id="gameName" [(ngModel)]="gameName" name="gameName" placeholder="Search for a game...">
             </div>
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
@@ -12,3 +14,6 @@
     No games found.
   </div>
 }
+</div>
+</div>
+</div>

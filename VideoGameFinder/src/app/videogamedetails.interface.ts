@@ -11,7 +11,4 @@ export interface GameResults {
     tba: boolean;
     background_image: string;
     rating: number;
-    
-    
-
 }

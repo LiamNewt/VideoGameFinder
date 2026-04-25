@@ -1,9 +1,10 @@
+<h2>Results</h2>
 @for (gameData of gameService.games().slice(0,9);track gameData;) {
+    
         <div class="col-md-4 col-sm-6 mb-4 d-flex justify-content-center">
         <div class="card" style="width: 18rem;">
         <img [src]="gameData.background_image" [alt]="gameData.name" class="card-img-top poster-img">
         {{gameData.name}}
-        {{gameData.released}}
         <a [routerLink]="['/game', gameData.id]">View Details</a>
 </div>
 </div>

@@ -1,0 +1,20 @@
+<h2>Trending</h2>
+<div class="wrapper">
+<div class="position-relative">
+<button class="scroll-btn left" (click)="scrollLeft(scrollContainer)"><</button>
+<div #scrollContainer class="d-flex flex-row flex-nowrap gap-3 px-4 scroll-container">
+@for (trendingGame of trendingGameService.trendingGames(); track trendingGame){
+    <div class="card flex-shrink-0" style="width: 19rem; height: 22rem; border: solid white 1px;">
+    <a [routerLink]="['/game', trendingGame.id]">
+    <img class="card-img-top" [src]="trendingGame.background_image" alt="{{trendingGame.name}}">
+    <div class="card-body">
+        <h5>{{trendingGame.name}}</h5>
+        <p>{{trendingGame.released}}</p>
+    </div>
+    </a>
+    </div>
+}
+</div>
+<button class="scroll-btn right" (click)="scrollRight(scrollContainer)">></button>
+</div>
+</div>
