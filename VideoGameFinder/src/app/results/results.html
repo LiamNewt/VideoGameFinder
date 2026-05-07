@@ -1,14 +1,20 @@
 <div class="wrapper">
 <div class="container text-center">
         <div class="row justify-content-center">
+        <h2>Search Results</h2>
+        @if(gameService.games().length === 0){
+             <h3>No games to show..</h3>   
+        } @else {
         <h3>Showing {{gameService.games().length}} Results</h3>
+        }
 
 @for (gameData of gameService.games().slice(0,9);track gameData;) {
-        <div class="col-md-4 col-sm-6 mb-4 d-flex justify-content-center">
+        <div class="col-md-4 col-sm-6 mb-4 d-flex flex-row justify-content-center">
         <div class="card" style="width: 24rem;">
+        <a [routerLink]="['/game', gameData.id]">
         <img [src]="gameData.background_image" [alt]="gameData.name" class="card-img-top poster-img">
         {{gameData.name}}
-        <a [routerLink]="['/game', gameData.id]">View Details</a>
+        </a>
 </div>
 </div>
 }

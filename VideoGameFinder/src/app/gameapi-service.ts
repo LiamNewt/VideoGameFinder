@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { take } from 'rxjs';
-import { GameDetails, GameScreenshots, GameSearch} from './videogamedetails.interface';
+import { GameDetails, GameScreenshots, GameSearch, Genres, Platform} from './videogamedetails.interface';
 import { GameResults } from './videogamedetails.interface';
 
 @Injectable({
@@ -20,6 +20,9 @@ export class GameapiService {
 
   public games = signal<GameResults[]>([]);
   public game = signal<GameDetails | null>(null);
+  public genres = signal<Genres | null>(null);
+
+
   public screenshots = signal<GameScreenshots | null>(null);
   //Trending
   public trendingGames = signal<GameResults[]>([]);
@@ -86,6 +89,23 @@ export class GameapiService {
     })
   }
 
+  getGenres()
+  {
+    const url = `${this._baseUrl}genres?key=${this._apiKey}`;
+
+    this._http.get<Genres>(url)
+    .pipe(take(1))
+    .subscribe(data => {
+      this.genres.set(data);
+      console.log(this.genres());
+    })
+  }
+
+  getPlatforms()
+  {
+
+  }
+
   getGameScreenshots(id: string)
   {
     const url = `${this._baseUrl}games/${id}/screenshots?key=${this._apiKey}`;
@@ -97,8 +117,6 @@ export class GameapiService {
       console.log(this.screenshots());
     })
   }
-
-
 
   nextPage() {
     if (this.currentPage() < this.maxPages()){

@@ -6,23 +6,37 @@
         <div class="row g-0">
         <div class="col-md-4 text-center">
         <img src="{{ gameData.background_image }}" alt="{{ gameData.name }} poster" class="img-fluid" style="margin-left: 5px;">
+        <div class="basicInfo">
+        <h3 id="heading"><strong class="header">Genres:</strong></h3>
+        @for (genre of gameData.genres; track genre.id){
+            <h3 id="heading">{{genre.name}}</h3>
+        }
+        <h3 id="heading"><strong class="header">Rating:</strong>{{gameData.esrb_rating.name}}</h3>
+        <h3 id="heading"><strong class="header">Platforms:</strong></h3>
+        @for (platform of gameData.platforms; track platform.platform.id){
+            <h3 class="platform">{{platform.platform.name}}</h3>
+        }
         </div>
-            
+        </div>
         <div class="col-md-8">
             <div class="card-body">
             <h2 class="card-title"> {{ gameData.name }}</h2>
             <div class="infoDiv">
-            <p class="card-text"><strong>TBA:</strong> {{ gameData.tba }}</p>
-            <p class="card-text"><strong>Release Date:</strong> {{ gameData.released }}</p>
-            <p class="card-text"><strong>Rating:</strong> {{ gameData.rating }}</p>
+                @if(gameData.tba === true){
+                    <p class="card-text"><strong class="info">TBA:</strong> Yes</p>
+                } @else {
+                    <p class="card-text"><strong class="info">TBA:</strong> No</p>
+                }
+            <p class="card-text"><strong class="info">Release Date:</strong> {{ gameData.released }}</p>
+            <p class="card-text"><strong class="info">Rating:</strong> {{ gameData.rating }}</p>
             </div>
             <div class="descDiv">
-            <p class="card-text"><strong>Description:</strong></p>
+            <p class="card-text"><strong class="info">Description:</strong></p>
             <div [innerHTML]="gameData.description"></div>
             </div>
     </div>
-            <button class="btn btn-secondary" routerLink="/">Search Another Game</button>
-            <button class="btn btn-secondary" >Add To Wishlist</button>
+            <button class="btnSearch btn-secondary" routerLink="/">Search Another Game</button>
+            <button class="btnWsh btn-secondary" ><strong class="plus">+</strong>Add To Wishlist</button>
 
         </div>
             <div class="container-fluid p-4">

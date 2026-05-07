@@ -1,0 +1,22 @@
+<h2>Genres</h2>
+<div class="wrapper">
+<div class="position-relative">
+<button class="scroll-btn left" (click)="scrollLeft(scrollContainer)"><</button>
+<div #scrollContainer class="d-flex flex-row flex-nowrap gap-3 px-4 scroll-container">
+@for (genre of genreService.genres()?.results; track genre.id){
+    <a [routerLink]="['/genre', genre.id]">
+    <img class="card-img-top" [src]="genre.image_background" alt="{{genre.name}}">
+    <div class="genreName">
+    <h3>{{genre.name}}</h3>
+    
+    </div>
+    </a>
+
+
+
+
+}
+</div>
+<button class="scroll-btn right" (click)="scrollRight(scrollContainer)">></button>
+</div>
+

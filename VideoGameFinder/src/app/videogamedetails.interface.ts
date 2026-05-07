@@ -1,3 +1,5 @@
+import { count } from "rxjs";
+
 export interface GameSearch {
     results: GameResults[];
     count?: number;
@@ -32,6 +34,26 @@ export interface GameDetails {
     achievements_count: number;
     game_series_count: number;
     platforms: Platforms[];
+    genres: GenreResults[];
+    stores: StoresSelling[];
+    esrb_rating:{
+        id:number;
+        slug:string;
+        name:string;
+    }
+}
+
+export interface Genres{
+    count: number;
+    results: GenreResults[];
+}
+
+export interface GenreResults{
+    id: number;
+    name: string;
+    slug: string;
+    games_count: number;
+    image_background: string;
 }
 
 export interface MetaCriticPlatforms{
@@ -54,6 +76,18 @@ export interface Platform{
     id: number;
     slug: string;
     name: string;
+}
+
+export interface StoresSelling{
+    count: number;
+    results: Store;
+}
+
+export interface Store{
+    id: number;
+    game_id: string;
+    store_id: string;
+    url: string;
 }
 
 export interface Requirements{

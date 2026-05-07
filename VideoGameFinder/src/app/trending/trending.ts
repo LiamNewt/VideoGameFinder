@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { GameapiService } from '../gameapi-service';
 import { inject } from '@angular/core';
-import { About } from "../about/about";
 
 
 @Component({
   selector: 'app-trending',
-  imports: [RouterLink, About],
+  imports: [RouterLink,],
   templateUrl: './trending.html',
   styleUrl: './trending.css',
 })
