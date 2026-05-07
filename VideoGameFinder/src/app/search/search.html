@@ -1,19 +1,21 @@
 <div class="container">
 <div class="row justify-content-center">
-    <div class="col-sm-4">
-        <h2 class="d-flex flex-column align-items-center mt-4">Game Search</h2>
+    <div class="col-sm-10 col-md-8 col-lg-6">
+        <h2 class="d-flex flex-column text-center mt-4">Game Search</h2>
 <form (ngSubmit)="add()">
-            <div class="mb-3">
-                <label form="gameName" class="form-label">Game Name</label>
+            <label form="gameName" class="form-label">Game Name</label>
+            <div class="input-group input-group-m">
                 <input type="text" class="form-control" id="gameName" [(ngModel)]="gameName" name="gameName" placeholder="Search for a game...">
-            </div>
             <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+
         </form>
         @if (searched && games.games().length === 0) {
-  <div class="alert alert-danger mt-3 text-center">
+<div class="alert alert-danger mt-3 text-center">
     No games found.
-  </div>
+</div>
 }
+
 </div>
 </div>
 </div>

@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { take } from 'rxjs';
-import { GameSearch } from './videogamedetails.interface';
+import { GameDetails, GameScreenshots, GameSearch} from './videogamedetails.interface';
 import { GameResults } from './videogamedetails.interface';
 
 @Injectable({
@@ -16,15 +16,28 @@ export class GameapiService {
   private _apiKey = "9dacf80d00644deab26a734dcc3d840b"
 
   private _lastTrendSearch = "";
+  private _lastSearch = "";
+
   public games = signal<GameResults[]>([]);
+  public game = signal<GameDetails | null>(null);
+  public screenshots = signal<GameScreenshots | null>(null);
+  //Trending
   public trendingGames = signal<GameResults[]>([]);
   public currentTrendPage = signal(1);
   public maxTrendPage = signal(1);
+  //All Games
+  public totalResults = signal(0);
+  public currentPage = signal(1);
+  public maxPages = signal(1);
+
+  resultsPerPage = 9;
+
 
 
   getGames(name: string)
   {
-    const url = `${this._baseUrl}games?search=${name}&key=${this._apiKey}`;
+    this._lastSearch = name;
+    const url = `${this._baseUrl}games?search=${name}&page=${this.currentPage()}&key=${this._apiKey}`;
 
     this._http.get<GameSearch>(url)
     .pipe(take(1))
@@ -35,6 +48,14 @@ export class GameapiService {
         this.games.set([]);
         console.log(this.games());
       }
+
+      const total = Number(data.count || 0);
+
+      this.totalResults.set(total);
+
+      this.maxPages.set(
+        Math.ceil(total / this.resultsPerPage)
+      );  
     })
   }
 
@@ -51,6 +72,46 @@ export class GameapiService {
         console.log(this.trendingGames());
       }
     })
+  }
+
+  getGameByID(id: string)
+  {
+    const url = `${this._baseUrl}games/${id}?key=${this._apiKey}`;
+
+    this._http.get<GameDetails>(url)
+    .pipe(take(1))
+    .subscribe(data => {
+      this.game.set(data);
+      console.log(this.game());
+    })
+  }
+
+  getGameScreenshots(id: string)
+  {
+    const url = `${this._baseUrl}games/${id}/screenshots?key=${this._apiKey}`;
+
+    this._http.get<GameScreenshots>(url)
+    .pipe(take(1))
+    .subscribe(data => {
+      this.screenshots.set(data);
+      console.log(this.screenshots());
+    })
+  }
+
+
+
+  nextPage() {
+    if (this.currentPage() < this.maxPages()){
+      this.currentPage.update(page => page + 1);
+      this.getGames(this._lastSearch);
+    }
+  }
+
+  previousPage(){
+    if (this.currentPage() > 1){
+      this.currentPage.update(page => page - 1);
+      this.getGames(this._lastSearch);
+    }
   }
 
 

@@ -1,1 +1,68 @@
-<p>details works!</p>
+<div class="wrapper">
+<div class="container mt-4">
+    @if (gameAPI.game(); as gameData) {
+        <h1>{{gameData.name}}</h1>
+        <div class="card mx-auto gameDetailsCard"; [style.background-image]="'linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(' + gameData.background_image + ')'" [style.background-size]="'cover'">
+        <div class="row g-0">
+        <div class="col-md-4 text-center">
+        <img src="{{ gameData.background_image }}" alt="{{ gameData.name }} poster" class="img-fluid" style="margin-left: 5px;">
+        </div>
+            
+        <div class="col-md-8">
+            <div class="card-body">
+            <h2 class="card-title"> {{ gameData.name }}</h2>
+            <div class="infoDiv">
+            <p class="card-text"><strong>TBA:</strong> {{ gameData.tba }}</p>
+            <p class="card-text"><strong>Release Date:</strong> {{ gameData.released }}</p>
+            <p class="card-text"><strong>Rating:</strong> {{ gameData.rating }}</p>
+            </div>
+            <div class="descDiv">
+            <p class="card-text"><strong>Description:</strong></p>
+            <div [innerHTML]="gameData.description"></div>
+            </div>
+    </div>
+            <button class="btn btn-secondary" routerLink="/">Search Another Game</button>
+            <button class="btn btn-secondary" >Add To Wishlist</button>
+
+        </div>
+            <div class="container-fluid p-4">
+            <div class="screenshotsCard row g-1">
+            <h4 class="mt-4">Screenshots</h4>
+                @for (shot of gameAPI.screenshots()?.results; track shot.id) {
+                <div class="col-md-4 mb-3">
+                <img [src]="shot.image" class="screenshot" alt="Game Screenshot" (click)="selectedScreenshot = shot.image"
+                data-bs-toggle="modal" data-bs-target="#screenshotModal">
+            </div>
+    }
+            </div>
+            </div>
+        </div>
+        <!-- Screenshot Pop-Up -->
+            <div class="modal fade" id="screenshotModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-dark">
+                    <div class="modal-body text-center p-0">
+                        <img [src]="selectedScreenshot" class="img-fluid" alt="Expanded Image">
+                    </div>
+                </div>
+            </div>
+            </div>
+    </div>
+    } @else {
+        <div>
+            <h3 style="color: black;">.. Game not found.</h3>
+        </div>
+    }
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+

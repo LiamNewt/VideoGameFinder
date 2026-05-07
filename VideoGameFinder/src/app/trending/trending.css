@@ -1,11 +1,10 @@
 img{
-    height: 250px;
-    width: 300px;
-    object-fit:inherit;
+    height: 200px;
+    justify-content: safe;
     object-position: center;
-    border: solid rgb(10, 224, 24, 0.5) 1px;
+    border: solid #0ae01880 1px;
     border-radius: 10px;
-    margin: 1px;
+    
 }
 h2{
     font-family: Arial, Helvetica, sans-serif;
@@ -22,16 +21,18 @@ h2{
     scroll-behavior: smooth;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    padding: 5px;
 }
 .scroll-container::-webkit-scrollbar{
     display: none;
 }
 .wrapper{
-    background: rgb(70, 70, 70);
+    background-color: rgba(0,0,0,0.55);
+    backdrop-filter: blur(3px);
     padding: 5px;
-    border: solid rgb(57, 255, 20) 2px;
+    border: solid #39ff14 1px;
     border-radius: 20px;
-    margin: 20px;
+    margin: 30px;
 
 }
 .card{
@@ -40,10 +41,14 @@ h2{
     font-style: normal;
     border-radius: 10px;
     border: solid rgba(57, 255, 20, 0.25) 1px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    padding: 2px;
 
 }
 .card:hover{
     box-shadow: 0 16px 40px rgb(57, 255, 20, 0.2);
+    transform: scale(1.03);
 }
 a{
     color: white;
@@ -75,7 +80,7 @@ a{
     color: #39ff14;
     border-color: #39ff14;
     box-shadow: 0 0 12px rgba(57,255,20,0.4);
-    transform: scale(0.9)
+    transform: scale(0.9);
 }
 .scroll-btn.left{
     left: -5px;

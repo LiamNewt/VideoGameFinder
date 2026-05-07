@@ -1,5 +1,6 @@
 .wrapper{
-    background-image: url(/images/lowOpacBg.png);
+    background: url(/images/homeBg.png);
+    backdrop-filter: blur(20px);
     position: relative;
     background-repeat: repeat;
 }
