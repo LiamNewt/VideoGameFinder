@@ -115,7 +115,7 @@ button:hover{
     border: solid #39FF14 1px;
     box-shadow: 0 16px 40px rgb(57, 255, 20, 0.2);
     color: white;
-    transform: scale(1.09);
+    transform: scale(1.2);
 }
 .btnWsh{
     background: rgb(24, 24, 24);

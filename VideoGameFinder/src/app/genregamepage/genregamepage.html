@@ -1,0 +1,25 @@
+<div class="wrapper">
+<div class="container text-center">
+    <h3 id="name">{{selectedGenre}}</h3>
+    <h3 id="count">Showing {{gameAPI.totalResults()}} Results</h3>
+<div class="row justify-content-center">
+@for (genreData of gameAPI.genreGames().slice(0,9);track genreData.id;) {
+        <div class="col-md-4 col-sm-6 mb-4 d-flex flex-row justify-content-center">
+        <div class="card" style="width: 24rem;">
+        <a [routerLink]="['/game', genreData.id]">
+        <img [src]="genreData.background_image" [alt]="genreData.name" class="card-img-top poster-img">
+        {{genreData.name}}
+        </a>
+</div>
+</div>
+}
+    
+</div>
+
+</div>
+    
+<div class="d-flex justify-content-center mt-4">
+        <button class="btn btn-secondary me-2" (click)="gameAPI.previousPage()" [disabled]="gameAPI.currentPage() ===1">Previous</button>
+        <button class="btn btn-secondary" (click)="gameAPI.nextPage()" [disabled]="gameAPI.currentPage() === gameAPI.maxPages()">Next</button>
+</div>
+</div>

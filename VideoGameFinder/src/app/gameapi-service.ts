@@ -17,28 +17,30 @@ export class GameapiService {
 
   private _lastTrendSearch = "";
   private _lastSearch = "";
+  private _lastGenre = "";
+  private _currentMode: 'search' | 'genre' = 'search';
 
   public games = signal<GameResults[]>([]);
+  public genreGames = signal<GameResults[]>([]);
   public game = signal<GameDetails | null>(null);
   public genres = signal<Genres | null>(null);
-
-
   public screenshots = signal<GameScreenshots | null>(null);
+
   //Trending
   public trendingGames = signal<GameResults[]>([]);
   public currentTrendPage = signal(1);
   public maxTrendPage = signal(1);
+
   //All Games
   public totalResults = signal(0);
   public currentPage = signal(1);
   public maxPages = signal(1);
 
   resultsPerPage = 9;
-
-
-
+  
   getGames(name: string)
   {
+    this._currentMode = 'search';
     this._lastSearch = name;
     const url = `${this._baseUrl}games?search=${name}&page=${this.currentPage()}&key=${this._apiKey}`;
 
@@ -51,14 +53,16 @@ export class GameapiService {
         this.games.set([]);
         console.log(this.games());
       }
-
       const total = Number(data.count || 0);
 
       this.totalResults.set(total);
-
       this.maxPages.set(
         Math.ceil(total / this.resultsPerPage)
       );  
+      if (this._currentMode !== 'search')
+      {
+        this.currentPage.set(1);
+      }
     })
   }
 
@@ -101,6 +105,34 @@ export class GameapiService {
     })
   }
 
+  getGamesForGenre(genre: string)
+  {
+    this._currentMode = 'genre';
+    this._lastGenre = genre;
+    const url = `${this._baseUrl}games?genres=${genre}&page=${this.currentPage()}&key=${this._apiKey}`;
+
+    this._http.get<GameSearch>(url)
+    .pipe(take(1))
+    .subscribe(data => {
+      if (data.results){
+        this.genreGames.set(data.results);
+      } else{
+        this.genreGames.set([]);
+        console.log(this.genreGames());
+      }
+      const total = Number(data.count || 0);
+
+      this.totalResults.set(total);
+
+      this.maxPages.set(
+        Math.ceil(total / this.resultsPerPage)
+      );  
+      if (this._currentMode !== 'genre'){
+        this.currentPage.set(1);
+      }
+    })
+  }
+
   getPlatforms()
   {
 
@@ -121,14 +153,29 @@ export class GameapiService {
   nextPage() {
     if (this.currentPage() < this.maxPages()){
       this.currentPage.update(page => page + 1);
+      if (this._currentMode === 'search')
+      {
       this.getGames(this._lastSearch);
+      }
+      else if (this._currentMode=== 'genre')
+      {
+      this.getGamesForGenre(this._lastGenre);
+      }
+
     }
   }
 
   previousPage(){
     if (this.currentPage() > 1){
       this.currentPage.update(page => page - 1);
+      if (this._currentMode === 'search')
+      {
       this.getGames(this._lastSearch);
+      }
+      else if (this._currentMode=== 'genre')
+      {
+      this.getGamesForGenre(this._lastGenre);
+      }
     }
   }
 
