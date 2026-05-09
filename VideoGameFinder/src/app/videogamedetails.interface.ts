@@ -1,4 +1,3 @@
-import { count } from "rxjs";
 
 export interface GameSearch {
     results: GameResults[];
@@ -35,7 +34,6 @@ export interface GameDetails {
     game_series_count: number;
     platforms: Platforms[];
     genres: GenreResults[];
-    stores: StoresSelling[];
     esrb_rating:{
         id:number;
         slug:string;
@@ -78,16 +76,26 @@ export interface Platform{
     name: string;
 }
 
-export interface StoresSelling{
+export interface GameStoreResponse{
     count: number;
-    results: Store;
+    results: GameStore[];
 }
 
+export interface GameStore{
+    id: number;
+    store_id: number;
+    url: string;
+}
+
+export interface StoreResponse{
+    count: number;
+    results: Store[];
+}
 export interface Store{
     id: number;
-    game_id: string;
-    store_id: string;
-    url: string;
+    name :string;
+    slug: string;
+    domain: string;
 }
 
 export interface Requirements{
@@ -109,5 +117,15 @@ export interface Screenshot{
     height: number;
 }
 
+export interface Achievements{
+    count: number;
+    results: Achievement[];
+}
+export interface Achievement{
+    id: number;
+    name: string;
+    image: string;
+    percent: string;
+}
 
 

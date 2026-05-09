@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { take } from 'rxjs';
-import { GameDetails, GameScreenshots, GameSearch, Genres, Platform} from './videogamedetails.interface';
+import { GameDetails, GameScreenshots, GameSearch, Genres, GameStoreResponse, Store, StoreResponse, Achievement, Achievements} from './videogamedetails.interface';
 import { GameResults } from './videogamedetails.interface';
 
 @Injectable({
@@ -24,7 +24,10 @@ export class GameapiService {
   public genreGames = signal<GameResults[]>([]);
   public game = signal<GameDetails | null>(null);
   public genres = signal<Genres | null>(null);
+  public stores = signal<Store[]>([]);
+  public storesForGames = signal<GameStoreResponse | null>(null);
   public screenshots = signal<GameScreenshots | null>(null);
+  public achievements = signal<Achievement[]>([]);
 
   //Trending
   public trendingGames = signal<GameResults[]>([]);
@@ -133,10 +136,31 @@ export class GameapiService {
     })
   }
 
-  getPlatforms()
+  getStores()
   {
+    const url = `${this._baseUrl}stores?key=${this._apiKey}`;
 
+    this._http.get<StoreResponse>(url)
+    .pipe(take(1))
+    .subscribe (data => {
+      this.stores.set(data.results);
+      console.log(this.stores());
+    })
   }
+
+  getStoresForGames(id: string)
+  {
+    const url = `${this._baseUrl}games/${id}/stores?key=${this._apiKey}`;
+
+    this._http.get<GameStoreResponse>(url)
+    .pipe(take(1))
+    .subscribe(data => {
+      this.storesForGames.set(data)
+      console.log(this.storesForGames());
+
+    })
+  }
+
 
   getGameScreenshots(id: string)
   {
@@ -147,6 +171,18 @@ export class GameapiService {
     .subscribe(data => {
       this.screenshots.set(data);
       console.log(this.screenshots());
+    })
+  }
+
+  getAchievements(id: string)
+  {
+    const url = `${this._baseUrl}games/${id}/achievements?page_size=100&key=${this._apiKey}`;
+    
+    this._http.get<Achievements>(url)
+    .pipe(take(1))
+    .subscribe(data => {
+      this.achievements.set(data.results);
+      console.log(this.achievements())
     })
   }
 

@@ -37,11 +37,11 @@
     </div>
             <button class="btnSearch btn-secondary" routerLink="/">Search Another Game</button>
             <button class="btnWsh btn-secondary" ><strong class="plus">+</strong>Add To Wishlist</button>
-
         </div>
             <div class="container-fluid p-4">
+            <div class="lowerSection">
             <div class="screenshotsCard row g-1">
-            <h4 class="mt-4">Screenshots</h4>
+            <h4 class="mt-4" style="text-align: center;">Screenshots</h4>
                 @for (shot of gameAPI.screenshots()?.results; track shot.id) {
                 <div class="col-md-4 mb-3">
                 <img [src]="shot.image" class="screenshot" alt="Game Screenshot" (click)="selectedScreenshot = shot.image"
@@ -49,7 +49,34 @@
             </div>
     }
             </div>
+            <div class="storeDiv">
+            <h4 class="mt-4" style="text-align: center;">Purchase From:</h4>
+                @for (storeSelling of gameAPI.storesForGames()?.results; track storeSelling.id){
+                    <a class="storeLink" [href]="storeSelling.url" target="_blank">
+                        <i [class]="getStoreIcons(storeSelling.store_id)"></i>
+                        {{getStoreName(storeSelling.store_id)}}</a>
+    }
+        </div>
+        </div>
+        <div class="achievementsSection">
+        <div class="dropdownAchs">
+            <button class="achsBtn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Game Achievements
+            </button>
+        <ul class="dropdown-menu dropdown-menu-dark col-md-4 mb-3">
+            @for(gameAchs of gameAPI.achievements();track gameAchs.id){
+                <div class="achsDiv col-md-4 mb-3">
+            <li>
+                <img src="{{gameAchs.image}}" class="achsImg" alt="Image">
+                <span class="dropdown-item">{{gameAchs.name}}</span>
+                <h3 class="rarity">Rarity:{{gameAchs.percent}}</h3>
+            </li>
             </div>
+            }
+  </ul>
+</div>
+</div>
+        </div>
         </div>
         <!-- Screenshot Pop-Up -->
             <div class="modal fade" id="screenshotModal" tabindex="-1" aria-hidden="true">
@@ -61,14 +88,13 @@
                 </div>
             </div>
             </div>
+            
     </div>
     } @else {
         <div>
             <h3 style="color: black;">.. Game not found.</h3>
         </div>
     }
-
-
 </div>
 </div>
 

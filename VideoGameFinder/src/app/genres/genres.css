@@ -32,6 +32,8 @@ img{
     border: solid rgba(57, 255, 20, 0.2) 1px;
     transition: transform 0.2s ease ;
     cursor: pointer;
+    box-shadow: 0 1px 15px rgb(57, 255, 20, 0.1);
+
 }
 img:hover{
     background: black;
