@@ -48,14 +48,13 @@ h2{
 }
 .card:hover{
     box-shadow: 0 16px 40px rgb(57, 255, 20, 0.2);
-    transform: scale(1.03);
+    transform: scale(1.06);
 }
+
 a{
     color: white;
     text-decoration: none;
 }
-
-
 .scroll-btn{
     position: absolute;
     margin: 2px;

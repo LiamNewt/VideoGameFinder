@@ -1,41 +1,55 @@
 .wrapper{
     background-color: rgba(20, 20, 40, 0.85);
+    
 }
 
 h1{
     color: white;
-    flex: 1;
     margin: 0;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-
+    background-color: rgba(20, 20, 40, 0.85);
+    text-align: center;
+    padding: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
 }
+
 main{
     background: rgba(20, 20, 40, 0.85);
     display: flex;
     align-items: center;
-    padding: 10px;
-    position: relative;
-    border: solid #39ff14 1px;
+    padding: 2px;
+    justify-content: center;
+    border-bottom: #39ff14 solid 1px;
 }
 nav{
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 15px;
     display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+
 }
 nav a{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 18px;
-    color: rgba(255,255,255,0.7);
+    font-weight: bold;
+    color: white;
     text-decoration: none;
     margin: 10px;
+    cursor: pointer;
     transition: all 0.2 ease;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
+
 nav a:hover {
     color: #39ff14;
     text-shadow: 0 0 6px rgba(57,255,20,0.6);
+    transform: scale(1.05);
 }
-nav a:active{
+
+.active{
     color: #39ff14;
+}
+button{
+    background-color: white;
 }

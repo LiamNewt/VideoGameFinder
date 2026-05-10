@@ -1,0 +1,36 @@
+<main>
+    <h1>Contact Form</h1>
+    <form action = "submission" name = contactForm method="GET">
+        <div class="mb-3">
+            <label for = "name" class="form-label">Your Name</label>
+            <input type="name" class="form-control" id="userName" name="userName" placeholder="" required>
+        </div>
+        <div class="mb-3">
+            <label for = "emailAddress" class="form-label">Your Email</label>
+            <input type="email" class="form-control" id="userEmail" name="userEmail" placeholder="name@example.com" required>
+        </div>
+        <div class="mb-3">
+            <label for="userComment" class="form-label">Your Comment</label>
+            <textarea class="form-control" id="userComment" name="userComment" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <br>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d37274.35492758497!2d-8.478318184472247!3d54.27481880126069!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x485ee9b5677caee9%3A0xa00c7a997317380!2sSligo!5e0!3m2!1sen!2sie!4v1742921395212!5m2!1sen!2sie" width="1500" height="450" style="border:0;"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+<h1>This is a repo test for GitHub</h1>
+</main>    
+    <script src="js/jquery-min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>    
+    <script>
+    $(document).ready(function(){
+        // Wait for a submit
+        $( "form" ).submit(function( event ) {
+            var formValues=$( this ).serializeArray() ;
+            console.log( formValues );
+            localStorage.setItem('regForm', JSON.stringify(formValues));
+            return false;
+        });       
+    });
+    </script>     
+

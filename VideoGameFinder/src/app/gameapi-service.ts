@@ -4,6 +4,9 @@ import { inject } from '@angular/core';
 import { take } from 'rxjs';
 import { GameDetails, GameScreenshots, GameSearch, Genres, GameStoreResponse, Store, StoreResponse, Achievement, Achievements} from './videogamedetails.interface';
 import { GameResults } from './videogamedetails.interface';
+import { Wishlist } from './wishlist/wishlist';
+import { environment } from '../environments/environment';
+
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +16,8 @@ export class GameapiService {
   private _http=inject(HttpClient);
 
   private _baseUrl = "https://api.rawg.io/api/";
-  private _apiKey = "9dacf80d00644deab26a734dcc3d840b"
+  private _apiKey = "9dacf80d00644deab26a734dcc3d840b";
+  private api = environment.apiUrl;
 
   private _lastTrendSearch = "";
   private _lastSearch = "";
@@ -28,6 +32,7 @@ export class GameapiService {
   public storesForGames = signal<GameStoreResponse | null>(null);
   public screenshots = signal<GameScreenshots | null>(null);
   public achievements = signal<Achievement[]>([]);
+  public wishlist = signal<GameDetails[]>([]);
 
   //Trending
   public trendingGames = signal<GameResults[]>([]);
@@ -215,6 +220,28 @@ export class GameapiService {
     }
   }
 
+  addToWishlist(game: GameResults)
+  {
+    const wishlist = {
+      gameId: game.id,
+      name: game.name,
+      image: game.background_image,
+      rating: game.rating,
+      released: game.released, 
+    };
 
+    this._http.post(this._apiKey, wishlist)
+    .subscribe(() => {
+      this.getWishlistGames();
+    });
+  }
 
+  getWishlistGames()
+  {
+    this._http.get<GameDetails[]>(this.api)
+    .pipe(take(1))
+    .subscribe(data => {
+      this.wishlist.set(data);
+    });
+  }
 }

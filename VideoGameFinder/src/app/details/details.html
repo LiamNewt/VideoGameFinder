@@ -16,6 +16,7 @@
         @for (platform of gameData.platforms; track platform.platform.id){
             <h3 class="platform">{{platform.platform.name}}</h3>
         }
+        <a class="linkWebsite" [href]="gameData.website">Visit Website</a>
         </div>
         </div>
         <div class="col-md-8">
@@ -68,8 +69,8 @@
                 <div class="achsDiv col-md-4 mb-3">
             <li>
                 <img src="{{gameAchs.image}}" class="achsImg" alt="Image">
-                <span class="dropdown-item">{{gameAchs.name}}</span>
-                <h3 class="rarity">Rarity:{{gameAchs.percent}}</h3>
+                <h2 class="dropdown-item">{{gameAchs.name}}</h2>
+                <h3 class="rarity">Rarity: {{gameAchs.percent}}%</h3>
             </li>
             </div>
             }

@@ -1,3 +1,19 @@
+.card{
+    min-height: 200px;
+    border: white solid 2px;
+    color: white;
+    padding: 10px;
+    width: 800px;
+    padding-top: 20px;
+    background: linear-gradient(145deg, #1b1b2f, #16213e);
+    padding: 5px;
+    border-radius: 25px;
+}
+.card-header{
+    color: white;
+}
 .wrapper{
-    background: url(/src/assets/images/gamesBGHome.png);
+    height: 800px;
+    background: url(/images/homeBg.png);
+    backdrop-filter: blur(20px);
 }
