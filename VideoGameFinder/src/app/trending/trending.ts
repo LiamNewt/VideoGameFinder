@@ -20,14 +20,14 @@ export class Trending {
 
   scrollLeft(container: HTMLElement): void {
   container.scrollBy({
-    left: -300,
+    left: -200,
     behavior: "smooth",
   });
 }
 
   scrollRight(container: HTMLElement): void {
   container.scrollBy({
-    left: 300,
+    left: 200,
     behavior: "smooth",
   });
 }

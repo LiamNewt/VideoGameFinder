@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { GameapiService } from '../gameapi-service';
 import { input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { signal } from '@angular/core';
 
 @Component({
   selector: 'app-details',
@@ -22,6 +23,8 @@ export class Details {
     this.gameAPI.getStores();
     this.gameAPI.getStoresForGames(gameId);
     this.gameAPI.getAchievements(gameId);
+    this.gameAPI.addToWishlist;
+    
   }
 
   getStoreName(store_id: number): string

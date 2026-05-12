@@ -2,7 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { take } from 'rxjs';
-import { GameDetails, GameScreenshots, GameSearch, Genres, GameStoreResponse, Store, StoreResponse, Achievement, Achievements} from './videogamedetails.interface';
+import { GameDetails, GameScreenshots, GameSearch, Genres, GameStoreResponse, Store, StoreResponse, Achievement, Achievements, WishlistGame} from './videogamedetails.interface';
 import { GameResults } from './videogamedetails.interface';
 import { Wishlist } from './wishlist/wishlist';
 import { environment } from '../environments/environment';
@@ -32,7 +32,8 @@ export class GameapiService {
   public storesForGames = signal<GameStoreResponse | null>(null);
   public screenshots = signal<GameScreenshots | null>(null);
   public achievements = signal<Achievement[]>([]);
-  public wishlist = signal<GameDetails[]>([]);
+  public wishlist = signal<WishlistGame[]>([]);
+  public showWishlistPopup = signal(false);
 
   //Trending
   public trendingGames = signal<GameResults[]>([]);
@@ -230,18 +231,32 @@ export class GameapiService {
       released: game.released, 
     };
 
-    this._http.post(this._apiKey, wishlist)
+    this._http.post(this.api, wishlist)
     .subscribe(() => {
       this.getWishlistGames();
+      this.showWishlistPopup.set(true);
+
+      setTimeout(() => {
+        this.showWishlistPopup.set(false)
+      }, 3000);
     });
   }
 
   getWishlistGames()
   {
-    this._http.get<GameDetails[]>(this.api)
+    this._http.get<WishlistGame[]>(this.api)
     .pipe(take(1))
     .subscribe(data => {
       this.wishlist.set(data);
+    });
+  }
+
+  deleteWishlistGame(gameId: string)
+  {
+    const url = this.api + '/' + gameId;
+    this._http.delete(url)
+    .subscribe(data => {
+      this.getWishlistGames();
     });
   }
 }

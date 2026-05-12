@@ -37,7 +37,11 @@
             </div>
     </div>
             <button class="btnSearch btn-secondary" routerLink="/">Search Another Game</button>
-            <button class="btnWsh btn-secondary" ><strong class="plus">+</strong>Add To Wishlist</button>
+            <button (click)="gameAPI.addToWishlist(gameData)" class="btnWsh btn-secondary" ><strong class="plus">+</strong>Add To Wishlist</button>
+            @if(gameAPI.showWishlistPopup())
+        {
+            <button class="showWishlistPopup">Added</button>
+        }
         </div>
             <div class="container-fluid p-4">
             <div class="lowerSection">

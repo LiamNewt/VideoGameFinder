@@ -128,4 +128,11 @@ export interface Achievement{
     percent: string;
 }
 
-
+export interface WishlistGame{
+    _id: string;
+    gameId: number;
+    name: string;
+    image: string;
+    rating: number;
+    released: string;
+}
