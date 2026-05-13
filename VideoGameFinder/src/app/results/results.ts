@@ -15,4 +15,12 @@ export class Results {
   constructor() {
     this.gameService = inject(GameapiService);
   }
+
+  selectedScreenshot: string = "";
+
+  ngOnInit() {
+    this.gameService.addToWishlist;
+    
+  }
+
 }

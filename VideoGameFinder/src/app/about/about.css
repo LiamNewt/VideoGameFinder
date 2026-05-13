@@ -1,5 +1,15 @@
+.wrapper{
+    background: url(/images/homeBg.png);
+    backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+
+}
+
 .card{
-    min-height: 200px;
+    max-height: 400px;
+    margin: 20px;
     border: white solid 2px;
     color: white;
     padding: 10px;
@@ -8,12 +18,12 @@
     background: linear-gradient(145deg, #1b1b2f, #16213e);
     padding: 5px;
     border-radius: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+    box-shadow: 0 16px 40px rgb(57, 255, 20, 0.2);
+
 }
 .card-header{
     color: white;
-}
-.wrapper{
-    height: 800px;
-    background: url(/images/homeBg.png);
-    backdrop-filter: blur(20px);
+    flex-wrap: wrap;
 }

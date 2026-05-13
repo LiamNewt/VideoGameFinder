@@ -1,3 +1,13 @@
+.wrapper{
+
+    background: url(/images/homeBg.png);
+    backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+
 img{
     justify-content: safe;
     height: 250px;

@@ -64,5 +64,9 @@ button{
     border: #39ff14 solid 1px;
     box-shadow: 0 16px 40px rgb(57, 255, 20, 0.2);
     background: rgb(75, 75, 97);
-
+}
+button:hover{
+    background: #39ff14;
+    border: solid 1px black;
+    color: black;
 }

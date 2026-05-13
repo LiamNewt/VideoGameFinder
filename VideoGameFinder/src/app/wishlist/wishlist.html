@@ -3,6 +3,10 @@
         <div class="row justify-content-center">
         <h2 style="margin-top: 20px;">Wishlist</h2>
 @for (wishlistData of gameAPI.wishlist();track wishlistData._id;) {
+        @if(gameAPI.wishlist().length === null)
+        {
+                <h2>Your wishlist is empty, try adding a game in the home/genre page or in a game details page.</h2>
+        } @else {
         <div class="col-md-4 col-sm-6 mb-4 d-flex flex-row justify-content-center">
         <div class="card" style="width: 24rem;">
         <a [routerLink]="['/game', wishlistData.gameId]">
@@ -14,6 +18,7 @@
         <button (click)="gameAPI.deleteWishlistGame(wishlistData._id)">Remove From Wishlist</button>
 </div>
 </div>
+        }
 }
 </div>
 </div>
